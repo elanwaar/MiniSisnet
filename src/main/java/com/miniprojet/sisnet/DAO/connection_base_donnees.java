@@ -22,6 +22,7 @@ public class connection_base_donnees{
 		String url = "jdbc:mysql://localhost:3306/sisnet";
 		String username = "root";
 		String password = "";
+		//test
 		
 		Connection connection = DriverManager.getConnection(url, username, password);
 		
