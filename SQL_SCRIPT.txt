@@ -1,0 +1,72 @@
+//1- CREATE TABLES WITHOUT FOREIGN KEYS
+
+CREATE TABLE CLIENTE(
+	id_dpersona tinyint PRIMARY KEY,
+	numepers numeric(38,6),
+	nombpers varchar(160),
+    ape1pers varchar(60),
+    ape2pers varchar(60),
+    tipodocu varchar(8),
+    numedocu varchar(20),
+    fechnaci timestamp(6) DEFAULT CURRENT_TIMESTAMP(6),
+    sexo char(1),
+    pais varchar(4),
+    idioma varchar(4),
+    id_dpedomi_fk tinyint,
+    fechalta timestamp(6) DEFAULT CURRENT_TIMESTAMP(6)
+	);
+
+CREATE TABLE DOMICILIO(
+	id_dpedomi tinyint PRIMARY KEY,
+    id_dpersona_fk tinyint,
+    tipodvia varchar(32),
+    nomcalle varchar(80),
+    numero varchar(10),
+    portal varchar(32),
+    escalera varchar(20),
+    piso varchar(20),
+    puerta varchar(16),
+    poblacion varchar(80),
+    provincia varchar(2),
+    postal varchar(20),
+    complemento varchar(80),
+    numedomi DECIMAL(5,0),
+    tipodomi varchar(4),
+    fechalta timestamp(6),
+    usuaalta varchar(64)
+);
+CREATE TABLE POLIZA(
+	id_dpolizas tinyint PRIMARY KEY,
+    ciaascod varchar(4),
+    producto varchar(8),
+    polizann decimal(4,0),
+    polizsec decimal(15,0),
+    polialta timestamp(15),
+    id_dpolscon_fk tinyint,
+    numrefer decimal(15,0),
+    solizann decimal(15,0),
+    estado char(1),
+    tipocomi varchar(8),
+    cicloren varchar(8),
+    usuaalta varchar(64)
+	);
+CREATE TABLE SITUACIONES(
+	id_dpolscon tinyint PRIMARY KEY,
+    id_dpolizas_fk tinyint,
+    numsitua decimal(4,0),
+    fechcont timestamp(6),
+    fechemis timestamp(6),
+    fechalta timestamp(6),
+    polisitu varchar(4),
+    causapol varchar(8)
+    );
+
+
+//2- ADD FOREIGN KEYS
+
+ALTER TABLE cliente ADD CONSTRAINT FOREIGN KEY (id_dpedomi_fk) REFERENCES DOMICILIO(id_dpedomi);
+ALTER TABLE domicilio ADD CONSTRAINT FOREIGN KEY (id_dpersona_fk) REFERENCES cliente(id_dpersona);
+ALTER TABLE poliza ADD CONSTRAINT FOREIGN KEY (id_dpolscon_fk) REFERENCES SITUACIONES(id_dpolscon);
+ALTER TABLE situaciones ADD CONSTRAINT FOREIGN KEY (id_dpolizas_fk) REFERENCES poliza(id_dpolizas);
+
+
