@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
 
 public class connection_base_donnees{
 	
@@ -22,11 +23,17 @@ public class connection_base_donnees{
 		String url = "jdbc:mysql://localhost:3306/sisnet";
 		String username = "root";
 		String password = "";
-		//test
 		
 		Connection connection = DriverManager.getConnection(url, username, password);
-		
 		return connection;
 		
 	}
+
+	public connection_base_donnees() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
 }
