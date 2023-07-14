@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<queries>
+    <select>
+    	<client>SELECT * FROM client</client>
+        <domicile>SELECT * FROM domicile</domicile>
+        <policy>SELECT * FROM policy</policy>
+        <situations>SELECT * FROM situations</situations>
+    </select>
+    
+    <select>
+        <client>SELECT * FROM client WHERE id_person = ?</client>
+        <domicile>SELECT * FROM domicile WHERE id_domicile = ?</domicile>
+        <policy>SELECT * FROM policy WHERE id_policy = ?</policy>
+        <situations>SELECT * FROM situations WHERE id_dpolscon = ?</situations>
+    </select>
+    
+    <update>
+        <client>UPDATE client SET id_person = ?, numclient = ?, clientname = ?, lastname1 = ?, lastname2 = ?, doctype = ?, 
+        	docnume = ?, birthdate = ?, sexe = ?, country = ?, language = ?, id_domicile_fk = ?, entrydate = ? WHERE id_person = ?
+        </client>
+    </update>
+    
+    <insert>
+        
+        <client>INSERT INTO client (id_person, numclient, clientname, lastname1, lastname2, doctype, docnume, birthdate, sexe, country, language, id_domicile_fk, entrydate) 
+        	VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+        </client>
+        <domicile>INSERT INTO `domicile` (`id_domicile`, `id_person_fk`, `typeofroad`, `streetname`, `number`, `portal`, `stairs`, `floor`, `door`, `population`, `province`, `postal`, `complement`, `numdomicile`, `typeofdomicile`, `entrydate`, `Entryuser`)
+        	VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+        </domicile>
+        <policy>INSERT INTO `policy` (`id_policy`, `ciaascod`, `product`, `policy_year`, `policysequential`, `policydischarge`, `id_dpolscon_fk`, `refnum`, `applicationyear`, `state`, `comissiontype`, ` renewalcycle`, `entryuser`) 
+        	VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        </policy>
+        <situations>INSERT INTO `situations` (`id_dpolscon`, `id_policy_fk`, `situationnum`, `counteddate`, ` issuedate`, `registrationdate`, `policysituation`, `causapol`) 
+        	VALUES(?,?,?,?,?,?,?,?)
+        </situations>
+        
+    </insert>
+    
+    <delete>
+    
+        <client>DELETE FROM client WHERE id_person = ?</client>
+        <domicile>DELETE FROM domicile WHERE id_domicile = ?</domicile>
+        <policy>DELETE FROM policy WHERE id_policy = ?</policy>
+        <situations>DELETE FROM situations WHERE id_dpolscon = ?</situations>
+        
+    </delete>
+</queries>
