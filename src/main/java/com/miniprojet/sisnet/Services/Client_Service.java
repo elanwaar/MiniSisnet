@@ -61,7 +61,7 @@ public class Client_Service {
 		try {
 			
 			Statement statement = connection.createStatement();
-			String selectAllQuery = readXML.selectAllQuery();
+			String selectAllQuery = readXML.selectAllQuery("client");
 			ResultSet resultset = statement.executeQuery(selectAllQuery);
 			
 			while(resultset.next()) {
@@ -100,7 +100,7 @@ public class Client_Service {
 		Client client = new Client();
 		try {
 			
-			String selectByIdQuery = readXML.selectByIdQuery();
+			String selectByIdQuery = readXML.selectByIdQuery("client");
 			PreparedStatement pst = connection.prepareStatement(selectByIdQuery);
 			pst.setInt(1, id);
 			ResultSet resultset = pst.executeQuery();
@@ -129,10 +129,12 @@ public class Client_Service {
 		return client;
 	}
 	
-	public Client update(Client client, int id) throws SQLException{
+	public Client update(Client client) throws SQLException{
 		
-		String updateQuery = readXML.updateQuery();
+		String updateQuery = readXML.updateQuery("client");
 		PreparedStatement pst = connection.prepareStatement(updateQuery);
+		int id = client.getId_person();
+		
 		try {
 			String sexeAsString = String.valueOf(client.getSexe());
 			pst.setInt(1, client.getId_person());

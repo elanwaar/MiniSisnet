@@ -2,6 +2,7 @@ package XML;
 
 
 
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -14,7 +15,7 @@ public class readXML {
 
     public static void main(String[] args) {}
     
-    public static String insertQuery(String table) {
+    public static String insertQuery(String table){
     	
     	String insertQuery="";
     	
@@ -29,27 +30,34 @@ public class readXML {
             }
     	}
     	
+    	Element insertElement = (Element) getRootElement().getElementsByTagName("insert").item(0);
+        insertQuery = insertElement.getElementsByTagName(table).item(0).getTextContent();
+        
+    	
     	return insertQuery;
     }
     
-    public static String selectAllQuery() {
+    public static String selectAllQuery(String table) {
+    	
     	String selectAllQuery="";
     	try {
+    		
     		Element selectElement = (Element) getRootElement().getElementsByTagName("select").item(0);
-    		selectAllQuery = selectElement.getElementsByTagName("client").item(0).getTextContent();
+    		selectAllQuery = selectElement.getElementsByTagName(table).item(0).getTextContent();
+    		
     	} catch (Exception e) {
     		// TODO: handle exception
     	}
     	return selectAllQuery;
     }
     
-    public static String selectByIdQuery() {
+    public static String selectByIdQuery(String table) {
     	
     	String selectByIdQuery="";
     	
     	try {
     		Element selectElement = (Element) getRootElement().getElementsByTagName("select").item(1);
-    		selectByIdQuery = selectElement.getElementsByTagName("client").item(0).getTextContent();
+    		selectByIdQuery = selectElement.getElementsByTagName(table).item(0).getTextContent();
     	} catch (Exception e) {
     		// TODO: handle exception
     	}
@@ -57,12 +65,12 @@ public class readXML {
     	return selectByIdQuery;
     }
     
-    public static String updateQuery() {
+    public static String updateQuery(String table) {
     	 
     	String updateQuery="";
     	try {
     		Element updateElement = (Element) getRootElement().getElementsByTagName("update").item(0);
-    		updateQuery = updateElement.getElementsByTagName("client").item(0).getTextContent();
+    		updateQuery = updateElement.getElementsByTagName(table).item(0).getTextContent();
     	} catch (Exception e) {
     		// TODO: handle exception
     	}

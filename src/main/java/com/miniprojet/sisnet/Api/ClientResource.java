@@ -1,5 +1,6 @@
 package com.miniprojet.sisnet.Api;
 
+import java.net.http.HttpResponse;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,6 +14,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.apache.http.protocol.ResponseServer;
+
 import com.miniprojet.sisnet.DAO.Tables.Client;
 import com.miniprojet.sisnet.Services.Client_Service;
 
@@ -34,9 +38,15 @@ public class ClientResource {
 			e.printStackTrace();
 		}
 		
-		return Response.status(Response.Status.CREATED)
-	            .entity("{\"message\": \"Data inserted successfully\"}")
-	            .build();
+		return Response
+			      .status(201)
+			      .header("Access-Control-Allow-Origin", "*")
+			      
+			      
+			      .header("Access-Control-Allow-Methods", 
+			        "POST")
+			      .entity("")
+			      .build();
 	}
 	 
 	 @Path("/get")
@@ -65,7 +75,7 @@ public class ClientResource {
 	 public Client updateClient(@PathParam("id") Integer id, Client client) throws SQLException {
 		 
 		 Client_Service client_Service = new Client_Service();
-		 client_Service.update(client, id);
+		 client_Service.update(client);
 		 
 		 return client;
 	 }
@@ -73,8 +83,10 @@ public class ClientResource {
 	 @Path("/delete/{id}")
 	 @DELETE
 	 @Produces(MediaType.TEXT_HTML)
-	 public String delete(@PathParam("id") Integer id) {
+	 public Response delete(@PathParam("id") Integer id) {
 		 
+	    
+
 		Client_Service client_Service = new Client_Service();
 		boolean deleted = false;
 		try {
@@ -85,11 +97,11 @@ public class ClientResource {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 if (deleted == true) {
-			 return "client was deleted with success";
-		}else {
-			return "client was not deleted";
-		}
+		return Response
+			      .status(200)
+			      
+			      .entity("")
+			      .build();
 		 
 	 }
 	 
