@@ -15,9 +15,17 @@
     </select>
     
     <update>
-        <client>UPDATE client SET id_person = ?, numclient = ?, clientname = ?, lastname1 = ?, lastname2 = ?, doctype = ?, 
-        	docnume = ?, birthdate = ?, sexe = ?, country = ?, language = ?, id_domicile_fk = ?, entrydate = ? WHERE id_person = ?
-        </client>
+        <client>
+			UPDATE client SET numclient = ?, clientname = ?, 
+			lastname1 = ?, lastname2 = ?, doctype = ?, docnume = ?, birthdate = ?, 
+			sexe = ?, country = ?, language = ?, id_domicile_fk = ?, entrydate = ? WHERE id_person = ?
+		</client>
+        <domicile>
+        	UPDATE domicile SET id_person_fk = ?, typeofroad = ?, 
+			streetname = ?, number = ?, portal = ?, stairs = ?, floor = ?, 
+			door = ?, population = ?, province = ?, postal = ?, complement = ?, 
+			numdomicile = ?, typeofdomicile = ?, entrydate = ?, Entryuser = ? WHERE id_domicile = ?
+		</domicile>
     </update>
     
     <insert>

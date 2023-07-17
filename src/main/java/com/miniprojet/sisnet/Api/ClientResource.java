@@ -1,6 +1,5 @@
 package com.miniprojet.sisnet.Api;
 
-import java.net.http.HttpResponse;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,9 +13,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import org.apache.http.protocol.ResponseServer;
-
 import com.miniprojet.sisnet.DAO.Tables.Client;
 import com.miniprojet.sisnet.Services.Client_Service;
 
@@ -27,7 +23,7 @@ public class ClientResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response insert (Client client) {
+	public Response insert (Client client) throws SQLException {
 		
 		Client_Service client_Service = new Client_Service();
 		
@@ -38,15 +34,7 @@ public class ClientResource {
 			e.printStackTrace();
 		}
 		
-		return Response
-			      .status(201)
-			      .header("Access-Control-Allow-Origin", "*")
-			      
-			      
-			      .header("Access-Control-Allow-Methods", 
-			        "POST")
-			      .entity("")
-			      .build();
+		return Response.status(201).entity(client).build();
 	}
 	 
 	 @Path("/get")
@@ -55,7 +43,6 @@ public class ClientResource {
 	 public List<Client> getAllData() {
 	     
 		 Client_Service client_Service = new Client_Service();
-		 client_Service.getAll();
 		 
 	     return client_Service.getAll();
 	}
@@ -75,7 +62,7 @@ public class ClientResource {
 	 public Client updateClient(@PathParam("id") Integer id, Client client) throws SQLException {
 		 
 		 Client_Service client_Service = new Client_Service();
-		 client_Service.update(client);
+		 client_Service.update(client, id);
 		 
 		 return client;
 	 }
@@ -83,26 +70,14 @@ public class ClientResource {
 	 @Path("/delete/{id}")
 	 @DELETE
 	 @Produces(MediaType.TEXT_HTML)
-	 public Response delete(@PathParam("id") Integer id) {
-		 
-	    
-
+	 public Response delete(@PathParam("id") Integer id) throws SQLException {
+		
 		Client_Service client_Service = new Client_Service();
-		boolean deleted = false;
-		try {
-			
-			deleted = client_Service.delete(id);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(client_Service.delete(id) == true) {
+			return Response.status(204).build();
+		}else {
+			return Response.status(404).build();
 		}
-		return Response
-			      .status(200)
-			      
-			      .entity("")
-			      .build();
-		 
 	 }
 	 
 	 

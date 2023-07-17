@@ -80,21 +80,11 @@ public class readXML {
     
     public static String deleteQuery(String table) {
     	String deleteQuery = "";
-    	switch (table) {
-		case "client":
-			try {
-				Element deleteElement = (Element) getRootElement().getElementsByTagName("delete").item(0);
-				deleteQuery = deleteElement.getElementsByTagName("client").item(0).getTextContent();
-				
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			break;
-
-		default:
-			break;
-		}
     	
+				Element deleteElement = (Element) getRootElement().getElementsByTagName("delete").item(0);
+				deleteQuery = deleteElement.getElementsByTagName(table).item(0).getTextContent();
+				
+			
     	return deleteQuery;
     }
     

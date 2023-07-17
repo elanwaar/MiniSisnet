@@ -15,6 +15,7 @@ public class RestEasyServices extends Application{
 	    public RestEasyServices() {
 	        singletons.add(new ClientResource());
 	        singletons.add(new corsFilter());
+	        singletons.add(new DomicileResource());
 	    }
 
 	    @Override
