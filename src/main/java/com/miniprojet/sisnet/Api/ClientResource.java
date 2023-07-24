@@ -25,16 +25,16 @@ public class ClientResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response insert (Client client) throws SQLException {
 		
-		Client_Service client_Service = new Client_Service();
 		
-		try {
-			client_Service.insert(client);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return Response.status(201).entity(client).build();
+		  Client_Service client_Service = new Client_Service();
+		  
+		  try { 
+			  client_Service.insert(client); 
+		  } 
+		  catch (SQLException e) {
+			  e.printStackTrace(); }
+		 
+		return Response.status(201).build();
 	}
 	 
 	 @Path("/get")

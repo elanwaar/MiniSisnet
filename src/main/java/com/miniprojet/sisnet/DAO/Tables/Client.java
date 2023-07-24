@@ -6,7 +6,6 @@ public class Client {
 
 	
 	private int id_person;
-	
 	private int numclient ;
 	private String clientname;
 	private String lastname1; 
@@ -33,18 +32,27 @@ public class Client {
 		this.numclient = numclient;
 	}
 	public String getClientname() {
+		if(clientname =="") {
+			return null;
+		}
 		return clientname;
 	}
 	public void setClientname(String clientname) {
 		this.clientname = clientname;
 	}
 	public String getLastname1() {
+		if(lastname1 =="") {
+			return null;
+		}
 		return lastname1;
 	}
 	public void setLastname1(String lastname1) {
 		this.lastname1 = lastname1;
 	}
 	public String getLastname2() {
+		if(lastname2 =="") {
+			return null;
+		}
 		return lastname2;
 	}
 	public void setLastname2(String lastname2) {
@@ -57,6 +65,9 @@ public class Client {
 		this.doctype = doctype;
 	}
 	public String getDocnume() {
+		if(docnume =="") {
+			return null;
+		}
 		return docnume;
 	}
 	public void setDocnume(String docnume) {
@@ -94,7 +105,7 @@ public class Client {
 		this.id_domicile_fk = id_domicile_fk;
 	}
 	public Timestamp getEntrydate() {
-		return entrydate;
+		return new Timestamp(System.currentTimeMillis());
 	}
 	public void setEntrydate(Timestamp entrydate) {
 		this.entrydate = entrydate;
